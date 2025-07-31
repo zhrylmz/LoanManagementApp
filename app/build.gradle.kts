@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.hilt.ksp)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -37,8 +38,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlin{
+    kotlin {
         jvmToolchain(17)
+        compilerOptions {
+            freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
+        }
     }
 
     buildFeatures {
@@ -57,6 +61,8 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.security.crypto)
+    implementation(libs.serialization)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -86,8 +92,15 @@ dependencies {
 
     // Coroutine support
     implementation(libs.kotlinx.coroutines.android)
+
+    //collection
+    implementation(libs.kotlin.immutable.list)
+
+    // module
+    implementation(projects.contract)
+    implementation(projects.network)
 }
 
 hilt {
-    enableAggregatingTask = true
+    //enableAggregatingTask = true
 }
