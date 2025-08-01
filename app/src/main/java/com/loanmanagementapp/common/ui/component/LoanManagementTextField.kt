@@ -1,4 +1,4 @@
-package com.loanmanagementapp.common.ui
+package com.loanmanagementapp.common.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -99,8 +99,13 @@ dependencies {
     // module
     implementation(projects.contract)
     implementation(projects.network)
+
+    //test
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.turbine)
+    testImplementation(libs.test.kotlinx.coroutines)
 }
 
 hilt {
-    //enableAggregatingTask = true
+    enableAggregatingTask = true
 }

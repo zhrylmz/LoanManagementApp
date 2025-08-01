@@ -22,6 +22,9 @@ networkRetrofit = "3.0.0"
 securityCrypto = "1.1.0"
 serialization = "1.9.0"
 ui = "1.8.3"
+test_kotlinx_coroutines = "1.10.2"
+test_mockk = "1.14.5"
+test_turbine = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,6 +55,10 @@ network-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", versio
 network-okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+test-kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "test_kotlinx_coroutines" }
+test-mockk = { group = "io.mockk", name = "mockk", version.ref = "test_mockk" }
+test-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "test_turbine" }
+
 
 [plugins]
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
