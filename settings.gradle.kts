@@ -19,6 +19,9 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "LoanManagementApp"
 include(":app")
- 
+include(":contract")
+include(":network")

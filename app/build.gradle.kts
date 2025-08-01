@@ -1,13 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt") // Kapt'ı doğrudan buraya ekledik
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.hilt.ksp)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.serialization)
 }
 
 android {
     namespace = "com.loanmanagementapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.loanmanagementapp"
@@ -32,12 +34,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    kotlin {
+        jvmToolchain(17)
+        compilerOptions {
+            freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
+        }
     }
+
     buildFeatures {
         compose = true
     }
@@ -52,10 +59,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.javapoet)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.security.crypto)
+    implementation(libs.serialization)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -71,23 +78,34 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Jetpack Compose ve Core KTX bağımlılıklarını da güncelleyin
     implementation(libs.ui)
     implementation(libs.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx.v270)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
     // Hilt Dependency Injection
-    implementation(libs.hilt.android.v250)
-    kapt(libs.hilt.compiler.v250)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
     // Coroutine support
     implementation(libs.kotlinx.coroutines.android)
+
+    //collection
+    implementation(libs.kotlin.immutable.list)
+
+    // module
+    implementation(projects.contract)
+    implementation(projects.network)
+
+    //test
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.turbine)
+    testImplementation(libs.test.kotlinx.coroutines)
 }
 
 hilt {
-    enableAggregatingTask = false
+    enableAggregatingTask = true
 }
